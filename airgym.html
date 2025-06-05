@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Воздушная гимнастика</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background: url('https://sun9-29.userapi.com/impg/zHiKYnuvPyqduNDqkrC3Kl5RcE6I0g2mv7Qpsw/51R8mXnlFBw.jpg?size=1280x853&quality=95&sign=86870fe242771c072848cc3cc6138417&type=album') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        header {
+            background: linear-gradient(135deg, #8ba888 0%, #5a6f59 100%); 
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            animation: headerGlow 8s infinite alternate;
+        }
+        @keyframes headerGlow {
+            0% { box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+            100% { box-shadow: 0 4px 30px rgba(139, 168, 136, 0.6); }
+        }
+        header h1 {
+            position: relative;
+            font-size: 2.5em;
+            margin: 0;
+            padding: 10px 20px;
+            display: inline-block;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: titleFloat 4s ease-in-out infinite alternate;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            transform-style: preserve-3d;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 15px;
+            transition: all 0.4s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        nav a:hover {
+            transform: translateY(-3px);
+            color: #fff;
+        }
+        nav a:hover::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+        section {
+            padding: 60px 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            scroll-margin-top: 100px;
+        }
+        #contact {
+            background: linear-gradient(135deg, #7a9978 0%, #4a5f49 100%);
+            color: white;
+        }
+        .btn {
+            background: #6a8c69;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .btn:hover {
+            background: #5a7c59;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: slideDown 0.4s ease-out;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .close:hover {
+            color: #333;
+            transform: rotate(90deg);
+        }
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Воздушная гимнастика</h1>
+        <nav>
+            <a href="#about">О нас</a>
+            <a href="#pricing">Абонементы</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Секция "О нас" -->
+        <section id="about">
+            <h2>О нашем центре</h2>
+            <p>Мы - крупнейший центр воздушной гимнастики в Тюмени, предлагающий профессиональное обучение для всех уровней подготовки.</p>
+            <h3>Наши направления:</h3>
+            <ul>
+                <li>Воздушные полотна</li>
+                <li>Воздушное кольцо</li>
+                <li>Хореография</li>
+                <li>Акробатика</li>
+                <li>Школа красоты и грации</li>
+            </ul>
+            <img src="bsh.jpg" alt="БРИЛЛИАНТОВЫЙ ШМЕЛЬ" style="max-width:100%; border-radius:10px; margin-top:20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        </section>
+        <!-- Секция "Абонементы" -->
+        <section id="pricing">
+            <h2>Наши абонементы</h2>
+            <p>Выберите подходящий вариант занятий:</p>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Разовый</h3>
+                    <p>500 ₽</p>
+                    <button class="btn" onclick="openModal('Разовый', '500 ₽')">Выбрать</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Месячный</h3>
+                    <p>5000 ₽</p>
+                    <button class="btn" onclick="openModal('Месячный', '5000 ₽')">Выбрать</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Годовой</h3>
+                    <p>10000 ₽</p>
+                    <button class="btn" onclick="openModal('Годовой', '10000 ₽')">Выбрать</button>
+                </div>
+            </div>
+        </section>
+        <!-- Секция "Контакты" -->
+        <section id="contact">
+            <h2>Контакты</h2>
+            <div class="contact-info">
+                <div>
+                    <h3>Адрес</h3>
+                    <p>Тюмень, ул. Первомайская, 7</p>
+                    <p>Тюмень, ул. Феликса Аржанова, 39</p>
+                </div>
+                <div>
+                    <h3>Телефон</h3>
+                    <p>+7 (912) 391-07-19</p>
+                </div>
+                <div>
+                    <h3>Часы работы</h3>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 18:00</p>
+                </div>
+            </div>
+        </section>
+        <!-- Модальные окна -->
+        <div id="purchaseModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Оформление абонемента</h2>
+                <p>Вы выбрали: <strong><span id="selectedPlan"></span></strong></p>
+                <p>Стоимость: <strong><span id="planPrice"></span></strong></p>
+                <form id="purchaseForm" onsubmit="submitPurchaseForm(event)">
+                    <label>Имя:</label>
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+
+                    <label>Телефон:</label>
+                    <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" required>
+
+                    <label>Email:</label>
+                    <input type="email" name="email" placeholder="example@example.com">
+
+                    <label>Способ оплаты:</label>
+                    <select name="paymentMethod" required>
+                        <option value="">Выберите способ оплаты</option>
+                        <option value="online">Онлайн</option>
+                        <option value="cash">Наличными в зале</option>
+                    </select>
+
+                    <button type="submit">Оформить</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Переменные для хранения текущего абонемента
+        let currentPlan = '';
+        let currentPrice = '';
+
+        // Открытие модального окна
+        function openModal(plan, price) {
+            currentPlan = plan;
+            currentPrice = price;
+            document.getElementById('selectedPlan').textContent = plan;
+            document.getElementById('planPrice').textContent = price;
+            document.getElementById('purchaseModal').style.display = 'block';
+        }
+
+        // Закрытие модального окна
+        function closeModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+            document.getElementById('purchaseForm').reset();
+        }
+
+        // Обработка отправки формы
+        function submitPurchaseForm(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const name = form.name.value.trim();
+            const phone = form.phone.value.trim();
+            const email = form.email.value.trim();
+            const paymentMethod = form.paymentMethod.value;
+
+            alert(`Спасибо, ${name}!\n\n` +
+                  `Ваш ${currentPlan} абонемент успешно оформлен.\n` +
+                  `Стоимость: ${currentPrice}\n` +
+                  `Способ оплаты: ${paymentMethod === 'online' ? 'Онлайн' : 'Наличными'}\n\n` +
+                  `Мы свяжемся с вами по номеру ${phone}.`);
+
+            // Сброс формы и закрытие окна
+            form.reset();
+            closeModal();
+        }
+
+        // Закрытие окна при клике вне формы
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
